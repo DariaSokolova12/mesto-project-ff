@@ -1,5 +1,4 @@
-import './pages/index.css';
-import { initialCards } from './cards.js';
+
 // @todo: Темплейт карточки 
 
 const cardTemplate = document.querySelector('#card-template').content; 
@@ -49,7 +48,6 @@ function createCard(cardData, deleteCardCallback) {
 } 
 
  
-
 // @todo: Функция удаления карточки 
 
 function deleteCard(cardElement) { 
@@ -60,8 +58,7 @@ function deleteCard(cardElement) {
 
   } 
 
-} 
-
+}
  
 
 // @todo: Вывести карточки на страницу 
@@ -78,8 +75,5 @@ function renderInitialCards() {
 
 } 
 
- 
-
-// Вызываем функцию для вывода карточек на страницу 
 
 renderInitialCards();
