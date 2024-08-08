@@ -11,7 +11,7 @@ const openModal = (modal) => {
   const handleEscapes = (evt) => {
     if (evt.key === "Escape") {
       const currentPopup = document.querySelector(".popup_is-opened");
-      closeModal(currentPopup);
+      if (currentPopup) closeModal(currentPopup);
     }
   };
 

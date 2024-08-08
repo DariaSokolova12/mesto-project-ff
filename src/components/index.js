@@ -31,15 +31,10 @@ const previewImage = document.querySelector(".popup__image");
 const captionModal = document.querySelector(".popup__caption");
 const previewImageModal = document.querySelector(".popup_type_image");
 
-const clickHandleImage = (evt) => {
-  const element = evt.target.closest(".card");
-  const cardImage = element.querySelector(".card__image");
-  const cardTitle = element.querySelector(".card__title");
-
-  previewImage.src = cardImage.src;
-  previewImage.alt = cardTitle.alt;
-
-  captionModal.textContent = cardTitle.textContent;
+const clickHandleImage = (cardData) => {
+  previewImage.src = cardData.link;
+  previewImage.alt = cardData.name;
+  captionModal.textContent = cardData.name;
 
   openModal(previewImageModal);
 };
@@ -56,7 +51,8 @@ function renderInitialCards() {
   }); 
 
 } 
- renderInitialCards();
+
+renderInitialCards();
 
 
 const openModalEditProfile = () => {
@@ -83,16 +79,18 @@ const submitEditProfileForm = (evt) => {
 
 const submitAddForm = (evt) => {
   evt.preventDefault();
-
-  const addCard = createCard(
-    cardNameInput.value,
-    cardLinkInput.value,
-    likeCard,
+  const cardData = {
+    name: cardNameInput.value,
+    link: cardLinkInput.value
+  };
+ const addCard = createCard(
+    cardData,
     deleteCard,
+    likeCard,
     clickHandleImage
   );
-  cardList.prepend(addCard);
-
+  
+  placesList.prepend(addCard);
   addForm.reset();
   closeModal(modalAddCard);
 };
