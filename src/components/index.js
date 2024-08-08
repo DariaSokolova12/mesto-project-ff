@@ -1,12 +1,12 @@
 import "../index.css";
 import { initialCards } from "./cards";
-import { createCard, deleteCard ,likeCard} from "./card";
+import { createCard, deleteCard, likeCard } from "./card";
 import { openModal, closeModal } from "./modal";
 
 // DOM узлы 
 
 const placesList = document.querySelector('.places__list'); 
- 
+
 const editButton = document.querySelector(".profile__edit-button");
 
 const profileTitle = document.querySelector(".profile__title");
@@ -32,9 +32,7 @@ const cardNameInput = addForm.querySelector('input[name="place-name"]');
 const cardLinkInput = addForm.querySelector('input[name="link"]');
 
 const previewImage = document.querySelector('.popup__image');
-
 const previewImageModal = document.querySelector('.popup_type_image');
-
 const captionModal = document.querySelector('.popup__caption');
 
 /**
@@ -52,7 +50,6 @@ const clickHandleImage = (cardData) => {
   }
 };
 
-
 /**
  * Отрисовывает инициализирующие карточные элементы
  */
@@ -63,8 +60,8 @@ function renderInitialCards() {
   }); 
 }
 
+// Инициализация карточек при загрузке страницы
 renderInitialCards();
-
 
 /**
  * Открывает модальное окно редактирования профиля
@@ -124,5 +121,3 @@ editProfileForm.addEventListener("submit", submitEditProfileForm);
 
 addButton.addEventListener("click", openModalAddCard);
 addForm.addEventListener("submit", submitAddForm);
-
-

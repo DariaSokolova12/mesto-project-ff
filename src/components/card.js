@@ -1,6 +1,7 @@
 // Создание нового карточного элемента
 const cardTemplate = document.querySelector('#card-template').content; 
 
+
 function createCard(cardData, deleteCardCallback, imageOpenCallback) { 
 
     // Клонируем шаблон карточного элемента
@@ -35,16 +36,18 @@ function createCard(cardData, deleteCardCallback, imageOpenCallback) {
   
 } 
 
-
-
+/**
+ * Удаление карточного элемента
+ */
 function deleteCard(cardElement) { 
     if (cardElement) { 
       cardElement.remove(); 
     } 
 }
 
-
-
+/**
+ * Обработчик нажатия на кнопку "Like"
+ */
 const likeCard = (evt) => {
     const cardLikeButton = evt.target;
     cardLikeButton.classList.toggle("card__like-button_is-active");
@@ -52,4 +55,3 @@ const likeCard = (evt) => {
 
 // Экспортируем функции для использования в других файлах
 export { createCard, deleteCard, likeCard };
-
