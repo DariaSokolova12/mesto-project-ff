@@ -2,11 +2,13 @@ import "../index.css";
 import { initialCards } from "./cards";
 import { createCard } from "./card";
 import { openModal, closeModal } from "./modal";
+import {enableValidation ,clearValidation} from "./validation";
 
 // DOM узлы
 const placesList = document.querySelector(".places__list");
 const editButton = document.querySelector(".profile__edit-button");
 const profileTitle = document.querySelector(".profile__title");
+const profileImage = document.querySelector(".profile__image");
 const profileJob = document.querySelector(".profile__description");
 const addButton = document.querySelector(".profile__add-button");
 const modalEditProfile = document.querySelector(".popup_type_edit");
@@ -17,6 +19,7 @@ const modalAddCard = document.querySelector(".popup_type_new-card");
 const addForm = modalAddCard.querySelector(".popup__form");
 const cardNameInput = addForm.querySelector('input[name="place-name"]');
 const cardLinkInput = addForm.querySelector('input[name="link"]');
+const editFormElement = document.forms["edit-profile"];
 
 /**
  * Отрисовывает инициализирующие карточные элементы
@@ -77,6 +80,18 @@ const submitAddForm = (evt) => {
   addForm.reset();
   closeModal(modalAddCard);
 };
+
+// Установка слушателя на кнопку открытия формы редактирования профиля
+editButton.addEventListener("click", () => {
+  clearValidation(editFormElement,enableValidation);
+  openModal(modalEditProfile);
+});
+
+// Установка слушателя на кнопку открытия формы добавления карточки
+addButton.addEventListener("click", () => {
+  clearValidation(modalAddCard,enableValidation);
+  openModal(modalAddCard);
+});
 
 // События для открытия модальных окон
 editButton.addEventListener("click", openModalEditProfile);
