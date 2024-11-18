@@ -28,7 +28,7 @@
   }
 }
 
-.popup__button-inactive {
+.popup__button_disabled {
   color: #fff;
   opacity: 0.8;
   pointer-events: none;

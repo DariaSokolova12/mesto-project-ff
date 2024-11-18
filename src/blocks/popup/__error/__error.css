@@ -11,11 +11,11 @@
     visibility: hidden;
 }
 
-.form__input-error_active {
+.popup__error_visible {
     display: block;
     visibility: visible;
 }
 
-.form__input_type_error {
+.popup__input_type_error {
     border-bottom: 1px solid #F00;
 }
