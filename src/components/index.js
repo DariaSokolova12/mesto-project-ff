@@ -2,7 +2,7 @@ import "../index.css";
 import { initialCards } from "./cards";
 import { createCard } from "./card";
 import { openModal, closeModal } from "./modal";
-import { enableValidation, clearValidation } from "./validation";
+import { validationConfig, enableValidation, clearValidation } from "./validation";
 
 // DOM узлы
 const placesList = document.querySelector(".places__list");
@@ -82,15 +82,15 @@ const submitAddForm = (evt) => {
 };
 
 // Установка слушателя на кнопку открытия формы редактирования профиля
+// Использование clearValidation при открытии модальных окон
 editButton.addEventListener("click", () => {
-  clearValidation(editProfileForm); // Очистка валидации перед открытием формы редактирования
-  openModalEditProfile();
+  clearValidation(editProfileForm, validationConfig);
+  openModal(modalEditProfile);
 });
 
-// Установка слушателя на кнопку открытия формы добавления карточки
 addButton.addEventListener("click", () => {
-  clearValidation(addForm); // Очистка валидации перед открытием формы добавления карточки
-  openModalAddCard();
+  clearValidation(addForm, validationConfig);
+  openModal(modalAddCard);
 });
 
 // События для открытия модальных окон
@@ -98,5 +98,5 @@ editProfileForm.addEventListener("submit", submitEditProfileForm);
 addForm.addEventListener("submit", submitAddForm);
 
 // Включаем валидацию на странице
-enableValidation();
+enableValidation(validationConfig);
 
