@@ -1,8 +1,8 @@
 import "../index.css";
-import { initialCards } from "./cards";
 import { createCard } from "./card";
 import { openModal, closeModal } from "./modal";
 import { validationConfig, enableValidation, clearValidation } from "./validation";
+import { getUserInfo, getInitialCards, addNewCard, updateUserInfo, deleteCard, likeCardApi, dislikeCard, updateAvatar } from './api.js';
 
 // DOM узлы
 const placesList = document.querySelector(".places__list");
@@ -19,23 +19,28 @@ const modalAddCard = document.querySelector(".popup_type_new-card");
 const addForm = modalAddCard.querySelector(".popup__form");
 const cardNameInput = addForm.querySelector('input[name="place-name"]');
 const cardLinkInput = addForm.querySelector('input[name="link"]');
-const editFormElement = document.forms["edit-profile"];
 
-/**
- * Отрисовывает инициализирующие карточные элементы
- */
-const renderInitialCards = () => {
-  initialCards.forEach(cardData => {
-    const cardElement = createCard(cardData);
-    placesList.appendChild(cardElement);
-  });
+
+// Загрузка данных о пользователе и карточках
+const loadUserInfoAndCards = () => {
+  Promise.all([getUserInfo(), getInitialCards()])
+    .then(([userData, cards]) => {
+      profileTitle.textContent = userData.name;
+      profileJob.textContent = userData.about;
+      profileImage.src = userData.avatar;
+
+      cards.forEach((cardData) => {
+        const cardElement = createCard(cardData, userData._id); // Передаем ID пользователя
+        placesList.appendChild(cardElement);
+      });
+    })
+    .catch((err) => console.log(`Ошибка при загрузке данных: ${err}`));
 };
-// Инициализация карточек при загрузке страницы
-renderInitialCards();
 
-/**
- * Открывает модальное окно редактирования профиля
- */
+// Инициализация данных
+loadUserInfoAndCards();
+
+//Открывает модальное окно редактирования профиля 
 const openModalEditProfile = () => {
   openModal(modalEditProfile);
 
@@ -43,30 +48,25 @@ const openModalEditProfile = () => {
   jobInput.value = profileJob.textContent;
 };
 
-/**
- * Открывает модальное окно добавления места
- */
+// Открытие модального окна добавления карточки
 const openModalAddCard = () => {
   openModal(modalAddCard);
 };
 
-/**
- * Обработчик отправки формы редактирования профиля
- */
+// Обработчик отправки формы редактирования профиля
 const submitEditProfileForm = (evt) => {
   evt.preventDefault();
-
-  profileTitle.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-
-  editProfileForm.reset();
-
-  closeModal(modalEditProfile);
+  updateUserInfo(nameInput.value, jobInput.value)
+    .then((updatedData) => {
+      profileTitle.textContent = updatedData.name;
+      profileJob.textContent = updatedData.about;
+      profileImage.src = updatedData.avatar;
+      closeModal(modalEditProfile);
+    })
+    .catch((err) => console.log(`Ошибка при редактировании профиля: ${err}`));
 };
 
-/**
- * Обработчик отправки формы добавления места
- */
+// Обработчик отправки формы добавления нового места
 const submitAddForm = (evt) => {
   evt.preventDefault();
   const cardData = {
@@ -74,15 +74,17 @@ const submitAddForm = (evt) => {
     link: cardLinkInput.value,
   };
 
-  const addCard = createCard(cardData);
-
-  placesList.prepend(addCard);
-  addForm.reset();
-  closeModal(modalAddCard);
+  addNewCard(cardData)
+    .then((newCard) => {
+      const cardElement = createCard(newCard);
+      placesList.prepend(cardElement);
+      addForm.reset();
+      closeModal(modalAddCard);
+    })
+    .catch((err) => console.log(`Ошибка при добавлении карточки: ${err}`));
 };
 
-// Установка слушателя на кнопку открытия формы редактирования профиля
-// Использование clearValidation при открытии модальных окон
+// Установка слушателей для открытия модальных окон
 editButton.addEventListener("click", () => {
   clearValidation(editProfileForm, validationConfig);
   openModal(modalEditProfile);
@@ -93,10 +95,10 @@ addButton.addEventListener("click", () => {
   openModal(modalAddCard);
 });
 
-// События для открытия модальных окон
+// Добавление событий для отправки форм
 editProfileForm.addEventListener("submit", submitEditProfileForm);
 addForm.addEventListener("submit", submitAddForm);
 
-// Включаем валидацию на странице
+// Включаем валидацию
 enableValidation(validationConfig);
 
