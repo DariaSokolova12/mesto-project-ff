@@ -24,17 +24,22 @@ const cardLinkInput = addForm.querySelector('input[name="link"]');
 // Загрузка данных о пользователе и карточках
 const loadUserInfoAndCards = () => {
   Promise.all([getUserInfo(), getInitialCards()])
-    .then(([userData, cards]) => {
+    .then(([userData, cards]) =>  {
+
+
+      const userId = userData._id;
+
       profileTitle.textContent = userData.name;
       profileJob.textContent = userData.about;
       profileImage.src = userData.avatar;
 
       cards.forEach((cardData) => {
-        const cardElement = createCard(cardData, userData._id); // Передаем ID пользователя
-        placesList.appendChild(cardElement);
+       const cardElement = createCard(cardData, userId); // Передаем ID пользователя
+       placesList.appendChild(cardElement);
       });
     })
-    .catch((err) => console.log(`Ошибка при загрузке данных: ${err}`));
+    
+    .catch((err) => console.log(`Ошибка при загрузке данных ${err}`));
 };
 
 // Инициализация данных
@@ -43,7 +48,6 @@ loadUserInfoAndCards();
 //Открывает модальное окно редактирования профиля 
 const openModalEditProfile = () => {
   openModal(modalEditProfile);
-
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileJob.textContent;
 };
@@ -83,6 +87,7 @@ const submitAddForm = (evt) => {
     })
     .catch((err) => console.log(`Ошибка при добавлении карточки: ${err}`));
 };
+
 
 // Установка слушателей для открытия модальных окон
 editButton.addEventListener("click", () => {
