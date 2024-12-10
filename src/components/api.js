@@ -1,8 +1,8 @@
 
-const baseUrl = 'https://nomoreparties.co/v1/wff-cohort-22';
+const baseUrl = "https://nomoreparties.co/v1/wff-cohort-22";
 const headers = {
-  Authorization: 'acaff574-79d2-458f-8b94-edc6e369df38',
-  'Content-Type': 'application/json'
+  Authorization: "acaff574-79d2-458f-8b94-edc6e369df38",
+  "Content-Type": "application/json",
  };
 
 // Проверка ответа от сервера
