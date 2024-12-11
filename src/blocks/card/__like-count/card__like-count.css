@@ -1,3 +1,10 @@
+.card__like-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 .card__like-count {
   font-size: 13px;
   line-height: 16px;

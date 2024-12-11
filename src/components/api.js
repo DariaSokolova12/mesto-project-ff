@@ -13,70 +13,63 @@ const checkResponse = (res) => {
   return Promise.reject(`Ошибка: ${res.status}`);
 };
 
-// Получение данных о пользователе
-const getUserInfo = () => {
-  return fetch(`${baseUrl}/users/me`, {
-    headers: headers
+//Универсальная функция для запросов 
+const request = (url,options ={}) => {
+  return fetch(`${baseUrl}${url}`, {
+    headers,...options
   }).then(checkResponse);
 };
+
+// Получение данных о пользователе
+const getUserInfo = () => request('/users/me');
 
 
 // Получение всех карточек
-const getInitialCards = () => {
-  return fetch(`${baseUrl}/cards`, {
-    headers: headers
-  }).then(checkResponse);
-};
+const getInitialCards = () => request('/cards');
 
 // Обновление информации о пользователе (редактирование профиля)
 const updateUserInfo = (name, about) => {
-  return fetch(`${baseUrl}/users/me`, {
+  return request('/users/me', {
     method: 'PATCH',
-    headers: headers,
-    body: JSON.stringify({ name, about })
-  }).then(checkResponse);
+    body: JSON.stringify({name, about})
+  })
 };
 
 // Добавление новой карточки
 const addNewCard = (cardData) => {
-  return fetch(`${baseUrl}/cards`, {
+  return request('/cards', {
     method: 'POST',
-    headers: headers,
     body: JSON.stringify(cardData)
-  }).then(checkResponse);
+  })
 };
 
 // Удаление карточки
 const deleteCard = (cardId) => {
-  return fetch(`${baseUrl}/cards/${cardId}`, {
+  return request(`/cards/${cardId}`, {
     method: 'DELETE',
-    headers: headers
-  }).then(checkResponse);
+  })
 };
 
 // Постановка лайка
 const likeCardApi = (cardId) => {
-  return fetch(`${baseUrl}/cards/likes/${cardId}`, {
+  return request(`/cards/likes/${cardId}`, {
     method: 'PUT',
-    headers: headers
-  }).then(checkResponse);
+  })
 };
 
 // Снятие лайка
 const dislikeCard = (cardId) => {
-  return fetch(`${baseUrl}/cards/likes/${cardId}`, {
+  return request(`/cards/likes/${cardId}`, {
     method: 'DELETE',
-    headers: headers
-  }).then(checkResponse);
+  })
 };
 
 // Обновление аватара пользователя
-const updateAvatar = (avatarUrl) => {
-  return fetch(`${baseUrl}/users/me/avatar`, {
+const updateAvatar = (avatar) => {
+  return request('/users/me/avatar', {
     method: 'PATCH',
-    headers: headers,
-    body: JSON.stringify({ avatar: avatarUrl })
-  }).then(checkResponse);
+    body: JSON.stringify({ avatar })
+  })
 };
 
 export {getUserInfo, getInitialCards, updateUserInfo, addNewCard, deleteCard, likeCardApi, dislikeCard, updateAvatar} ;

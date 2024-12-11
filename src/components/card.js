@@ -14,14 +14,12 @@ const createCard = (cardData, userId) => {
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
   cardTitle.textContent = cardData.name;
-
-  // Отображаем количество лайков
   likeCount.textContent = cardData.likes.length;
 
-  // Показываем кнопку удаления только если карточка создана вами
+  // Показываем кнопку удаления только если карточка создана владельцем
   if (cardData.owner._id === userId) {
     deleteButton.style.display = "block";  // Показываем кнопку удаления
-    deleteButton.addEventListener("click", () => handleDeleteCard(cardData._id)); // Обработчик удаления
+    deleteButton.addEventListener("click", () =>  handleDeleteCard(cardElement,cardData._id)); // Обработчик удаления
   } else {
     deleteButton.style.display = "none";  // Скрываем кнопку удаления
   }
