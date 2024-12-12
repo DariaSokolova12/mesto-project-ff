@@ -47,7 +47,6 @@
             minlength="2"
             maxlength="40"
             pattern="^[А-яёA-z\s\-]+$"
-            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             required/>
           <span id="name-error" class="form__input-error name-error"></span>
         </label>
@@ -61,7 +60,6 @@
             minlength="2"
             maxlength="200"
             pattern="^[А-яёA-z\s\-]+$"
-            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             required/>
           <span id="description-error" class="form__input-error description-error"></span>
         </label>
@@ -84,7 +82,6 @@
             class="popup__input popup__input_type_card-name"
             placeholder="Название"
             pattern="^[А-яёA-z\s\-]+$"
-            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             required/>
           <span id="place-name-error" class="form__input-error place-name-error"></span>
         </label>
@@ -95,17 +92,16 @@
             id="link"
             class="popup__input popup__input_type_url"
             placeholder="Ссылка на картинку"
-            data-error-message="Разрешены только ссылки на изображения"
             required/>
          <span id="link-error" class="form__input-error link-error"></span>
         </label>
-        <button type="submit" class="button popup__button">Сохранить</button>
+        <button type="submit" class="button popup__button" disabled>Сохранить</button>
       </form>
     </div>
   </div>
   <div class="popup popup_type_image">
     <div class="popup__content popup__content_content_image">
-      <button type="button" class="popup__close"></button>
+      <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
       <img src="" alt="" class="popup__image">
       <p class="popup__caption"></p>
     </div>
@@ -115,14 +111,14 @@
 
 <template id="card-template">
   <li class="places__item card">
-    <img class="card__image" src="" alt="" />
-    <button type="button" class="card__delete-button"></button>
+    <img class="card__image" src="" alt="Фото места" />
+    <button type="button" class="card__delete-button" aria-label="Удалить карточку"></button>
     <div class="card__description">
       <h2 class="card__title">
       </h2>
     </div>
     <div class="card__like-container">
-      <button type="button" class="card__like-button"></button>
+      <button type="button" class="card__like-button" aria-label="Поставить лайк"></button>
       <span class="card__like-count"></span>
     </div>
   </li>
