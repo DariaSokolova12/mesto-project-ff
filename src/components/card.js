@@ -50,7 +50,7 @@ const handleDeleteCard = (cardId) => {
 
 // Функция для постановки лайка
 const handleLikeCard = (cardId, likeButton) => {
-  likeCardApi(cardId)  // Используем импортированную функцию likeCardApi для отправки запроса на сервер
+  likeCardApi(cardId)  
     .then((updatedCard) => {
       likeButton.classList.add('card__like-button_is-active');
       const likeCount = likeButton.nextElementSibling;  // Получаем элемент с количеством лайков

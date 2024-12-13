@@ -1,11 +1,9 @@
 import { updateUserInfo } from '../api.js';
 import { closeModal } from '../modal.js';
-import { clearEditProfileValidation, enableEditProfileValidation } from '../validation/editProfileValidation.js';
+import { clearValidation , setValidationListeners } from '../validation.js'
 import { handleSubmit, updateUserInfoInDOM } from '../utils.js';
-import { DOMElements } from '../DOMElements.js';
+import { modalEditProfile, profileTitle, profileJob , popupForm} from '../DOMElements.js';
 
-const { modalEditProfile, profileTitle, profileJob } = DOMElements;
-const editProfileForm = document.querySelector('.popup__form');
 
 // Обработчик отправки формы
 export const handleEditProfileSubmit = (evt) => {
@@ -17,17 +15,17 @@ export const handleEditProfileSubmit = (evt) => {
 };
 // Функция для открытия попапа с очисткой ошибок
 export const openEditProfilePopup = () => {
-  clearEditProfileValidation();
-  const nameInput = editProfileForm.querySelector('input[name="name"]');
-  const jobInput = editProfileForm.querySelector('input[name="description"]');
+  clearValidation(popupForm);
+  const nameInput = popupForm.querySelector('input[name="name"]');
+  const jobInput = popupForm.querySelector('input[name="description"]');
 
-  nameInput.value = document.querySelector(profileTitle).textContent;
-  jobInput.value = document.querySelector(profileJob).textContent;
+  nameInput.value = document.querySelector(".profile__title").textContent;
+  jobInput.value = document.querySelector(".profile__description").textContent;
 
-  enableEditProfileValidation();
+  setValidationListeners(popupForm);
 };
 
 // Инициализация обработчика отправки формы
 export const initializeEditProfilePopup = () => {
-  editProfileForm.addEventListener("submit", handleEditProfileSubmit);
+    popupForm.addEventListener("submit", handleEditProfileSubmit);
 };

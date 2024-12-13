@@ -1,11 +1,9 @@
 import { updateAvatar } from '../api.js';
 import { closeModal } from '../modal.js';
-import { clearAvatarValidation, enableAvatarValidation } from '../validation/avatarValidation.js';
+import { clearValidation , setValidationListeners } from '../validation.js';
 import { handleSubmit } from '../utils.js';
-import { DOMElements } from '../DOMElements.js';
+import { profileImage, avatarForm } from '../DOMElements.js';
 
-const { profileImage } = DOMElements;
-const avatarForm = document.querySelector('.popup__avatar-form');
 
 // Обработчик отправки формы
 export const handleAvatarSubmit = (evt) => {
@@ -18,8 +16,8 @@ export const handleAvatarSubmit = (evt) => {
 };
 // Функция для открытия попапа с очисткой ошибок
 export const openAvatarPopup = () => {
-  clearAvatarValidation();
-  enableAvatarValidation();
+  clearValidation(avatarForm);
+  setValidationListeners(avatarForm);
 };
 
 // Инициализация обработчика отправки формы
