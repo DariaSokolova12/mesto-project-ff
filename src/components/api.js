@@ -47,6 +47,7 @@ const addNewCard = (cardData) => {
 const deleteCard = (cardId) => {
   return request(`/cards/${cardId}`, {
     method: 'DELETE',
+    headers
   })
 };
 

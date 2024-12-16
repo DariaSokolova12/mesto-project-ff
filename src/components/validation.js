@@ -72,7 +72,7 @@ export function enableValidation(validationConfig) {
   };
   
 // Очистка ошибок и сброс кнопки
-export function clearValidation(formElement) {
+export function clearValidation(formElement , validationConfig) {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
 

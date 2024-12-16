@@ -9,12 +9,14 @@
     // Модальные окна
     export const modalEditProfile = document.querySelector(".popup_type_edit");
     export const modalAddCard = document.querySelector(".popup_type_new-card");
+    export const popupTypeImage = document.querySelector('.popup_type_image');
   
     // Формы
     export const popupForm = document.querySelector(".popup__form");
     export const editProfileForm = document.querySelector(".popup_type_edit");
     export const addForm = document.querySelector(".popup_type_new-card");
     export const avatarForm = document.querySelector(".popup_type_avatar");
+    export const deletePopup = document.querySelector(".popup_type_delete-card");
   
     // Поля ввода
     export const nameInput = document.querySelector('.popup_type_edit input[name="name"]');
@@ -26,4 +28,8 @@
     // Список карточек
     export const placesList = document.querySelector(".places__list");
 
+    export const avatarFormElement = document.forms['edit-avatar'];
+
+    export const popupImage = document.querySelector(".popup__image");
+    export const popupImageCaption = document.querySelector(".popup__caption");
   

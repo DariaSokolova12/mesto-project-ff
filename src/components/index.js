@@ -48,6 +48,8 @@ import {
    avatarInput, 
    placesList,
    popupForm,
+   deletePopup,
+   avatarFormElement
 } from "./DOMElements.js";
 
 import { clearValidation, enableValidation , validationConfig } from "./validation.js";
@@ -121,13 +123,13 @@ addForm.addEventListener("submit", submitAddForm);
 
 // Очистка и открытие окна редактирования профиля
 editButton.addEventListener("click", () => {
-  clearValidation(editProfileForm);
+  clearValidation(editProfileForm ,validationConfig);
   openModal(modalEditProfile);
 });
 
 // Очистка и открытие окна добавления карточки 
 addButton.addEventListener("click", () => {
-  clearValidation(validationConfig);
+  clearValidation(modalAddCard, validationConfig);
   openModal(modalAddCard);
 });
 

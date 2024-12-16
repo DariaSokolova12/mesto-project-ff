@@ -15,22 +15,24 @@ export const hideLoading = (buttonElement) => {
 };
 
 //функция для обработки отправки формы 
-export const handleSubmit = (makeRequest, event) => {
+export const handleSubmit = (request, event) => {
     event.preventDefault();
     const submitButton = event.target.querySelector(".popup__button");
-    const originalText = submitButton.textContent;
   
     // Показать индикатор загрузки
     submitButton.textContent = "Сохранение...";
     submitButton.disabled = true;
   
-    makeRequest()
+    request() 
+      .then (() => {
+        event.target.reset();
+      })
       .catch((err) => console.error(`Ошибка: ${err}`))
       .finally(() => {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
+        hideLoading(submitButton);
       });
 };
+
 
 //проверка ответа сервера 
 export const checkResponse = (res) => {

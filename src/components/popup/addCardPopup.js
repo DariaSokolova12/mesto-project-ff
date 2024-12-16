@@ -1,7 +1,7 @@
 import { addNewCard } from '../api.js';
 import { createCard } from '../card.js';
-import { closeModal } from '../modal.js';
-import { clearValidation , setValidationListeners } from '../validation.js';
+import { closeModal , openModal} from '../modal.js';
+import { clearValidation , setValidationListeners ,validationConfig } from '../validation.js';
 import { handleSubmit, resetForm } from '../utils.js';
 import { modalAddCard, placesList, popupForm} from '../DOMElements.js';
 
@@ -22,8 +22,9 @@ export const handleAddCardSubmit = (evt) => {
 };
 // Функция для открытия попапа с очисткой ошибок
 export const openAddCardPopup = () => {
-  clearValidation(modalAddCard);
-  setValidationListeners(modalAddCard);
+  clearValidation(modalAddCard ,validationConfig);
+  setValidationListeners(modalAddCard, validationConfig);
+  openModal(popupForm);
 };
 
 // Инициализация обработчика отправки формы

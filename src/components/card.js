@@ -1,4 +1,6 @@
 import { likeCardApi, dislikeCard, deleteCard } from './api.js'; 
+import { openModal , closeModal } from './modal.js';
+import { deletePopup } from './DOMElements.js';
 
 // Функция для создания карточки
 const createCard = (cardData, userId) => {
@@ -36,17 +38,32 @@ const createCard = (cardData, userId) => {
   return cardElement;
 };
 
+// Функция открытия попапа для подтверждения удаления карточки
+ const openPopupDelete = (cardElement, cardId) => {
+  openModal(deletePopup);
+};
+
+// Функция закрытия попапа подтверждения удаления карточки
+const closePopupDelete = () => {
+  closeModal(deletePopup);
+};
+
 // Функция для удаления карточки
-const handleDeleteCard = (cardId) => {
+const handleDeleteCard = (cardElement, cardId) => {
   deleteCard(cardId)
     .then(() => {
-      const cardElement = document.querySelector(`.card[data-id="${cardId}"]`);
-      if (cardElement) {
-        cardElement.remove();
-      }
-    })
+      cardElement.remove();
+      closePopupDelete();
+      })
     .catch((err) => console.log(`Ошибка при удалении карточки: ${err}`));
 };
+
+// Обработчик события отправки формы для удаления карточки
+const  addListenerDelete= (evt) => {
+  evt.preventDefault();
+  // Вызываем функцию удаления карточки
+  deleteCard(cardElement, cardId);
+}
 
 // Функция для постановки лайка
 const handleLikeCard = (cardId, likeButton) => {

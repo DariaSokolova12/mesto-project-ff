@@ -14,7 +14,10 @@
   </header>
   <main class="content">
     <section class="profile page__section">
-      <img class="profile__image" src="<%=require('./images/avatar.jpg')%>"></img>
+      <div
+      class="profile__image"
+      style="background-image: url('<%=require('./images/avatar.jpg')%>")
+    ></div>
       <div class="profile__info">
         <h1 class="profile__title">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" type="button"></button>
@@ -87,8 +90,8 @@
             data-error="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             required/>
           <span id="place-name-error" class="form__input-error place-name-error"></span>
-        </label>
-        <label>
+         </label>
+         <label>
           <input
             type="url"
             name="link"
@@ -98,7 +101,7 @@
             data-error="Разрешены только ссылки на изображения"
             required/>
          <span id="link-error" class="form__input-error link-error"></span>
-        </label>
+         </label>
         <button type="submit" class="button popup__button" disabled>Сохранить</button>
       </form>
     </div>

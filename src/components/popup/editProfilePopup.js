@@ -1,6 +1,6 @@
 import { updateUserInfo } from '../api.js';
-import { closeModal } from '../modal.js';
-import { clearValidation , setValidationListeners } from '../validation.js'
+import { closeModal , openModal} from '../modal.js';
+import { clearValidation , setValidationListeners ,validationConfig} from '../validation.js'
 import { handleSubmit, updateUserInfoInDOM } from '../utils.js';
 import { modalEditProfile, profileTitle, profileJob , popupForm} from '../DOMElements.js';
 
@@ -15,14 +15,15 @@ export const handleEditProfileSubmit = (evt) => {
 };
 // Функция для открытия попапа с очисткой ошибок
 export const openEditProfilePopup = () => {
-  clearValidation(popupForm);
+  clearValidation(popupForm , validationConfig);
   const nameInput = popupForm.querySelector('input[name="name"]');
   const jobInput = popupForm.querySelector('input[name="description"]');
 
   nameInput.value = document.querySelector(".profile__title").textContent;
   jobInput.value = document.querySelector(".profile__description").textContent;
 
-  setValidationListeners(popupForm);
+  setValidationListeners(popupForm ,validationConfig);
+  openModal(popupForm);
 };
 
 // Инициализация обработчика отправки формы
