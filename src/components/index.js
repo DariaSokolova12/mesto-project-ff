@@ -37,6 +37,7 @@ import {
    avatarEditButton,
    modalEditProfile,
    modalAddCard,
+   popupTypeImage,
    modalAvatar,
    editProfileForm, 
    addForm, 
@@ -49,11 +50,17 @@ import {
    placesList,
    popupForm,
    deletePopup,
-   avatarFormElement
+   avatarFormElement,
+   newPlaceElement,
+   popupImage,
+   popupImageCaption
 } from "./DOMElements.js";
 
 import { clearValidation, enableValidation , validationConfig } from "./validation.js";
 import { initializePopups, openPopupHandlers } from "./popup/index.js";
+
+// Валидация 
+enableValidation(validationConfig);
 
 // Инициализация попапов
 initializePopups();
@@ -71,7 +78,10 @@ const loadUserInfoAndCards = async () => {
 
     profileTitle.textContent = userData.name;
     profileJob.textContent = userData.about;
-    profileImage.src = userData.avatar;
+    profileImage.setAttribute(
+      "style",
+      `background-image: url('${userData.avatar}')`
+    );
 
     cards.forEach((cardData) => {
       const cardElement = createCard(cardData, userId);
@@ -129,10 +139,14 @@ editButton.addEventListener("click", () => {
 
 // Очистка и открытие окна добавления карточки 
 addButton.addEventListener("click", () => {
-  clearValidation(modalAddCard, validationConfig);
+  clearValidation(addForm, validationConfig);
   openModal(modalAddCard);
 });
 
-// Валидация 
-enableValidation(validationConfig);
+profileImage.addEventListener("click", () => {
+  clearValidation(avatarForm, validationConfig);
+  openModal(avatarForm);
+});
+
+
 

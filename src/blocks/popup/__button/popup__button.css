@@ -36,10 +36,3 @@
   border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
-.button_inactive {
-  opacity: 0.8;
-  pointer-events: none;
-  background: #000;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  color: #fff;
-}

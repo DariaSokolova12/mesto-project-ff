@@ -27,7 +27,7 @@
   
     // Список карточек
     export const placesList = document.querySelector(".places__list");
-
+    
     export const avatarFormElement = document.forms['edit-avatar'];
 
     export const popupImage = document.querySelector(".popup__image");
