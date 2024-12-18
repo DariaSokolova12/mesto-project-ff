@@ -2,7 +2,7 @@ import { updateUserInfo } from '../api.js';
 import { closeModal , openModal} from '../modal.js';
 import { clearValidation , setValidationListeners ,validationConfig} from '../validation.js'
 import { handleSubmit, updateUserInfoInDOM } from '../utils.js';
-import { modalEditProfile, profileTitle, profileJob , popupForm} from '../DOMElements.js';
+import { modalEditProfile, profileTitle, profileJob , popupForm , nameInput, jobInput} from '../DOMElements.js';
 
 
 // Обработчик отправки формы

@@ -1,3 +1,4 @@
+import { addForm } from "./DOMElements";
 
 export const showLoading = (buttonElement, loadingText) => {
   buttonElement.dataset.originalText = buttonElement.textContent;
@@ -17,6 +18,8 @@ export const hideLoading = (buttonElement) => {
 
 export function handleSubmit(makeRequest, evt) {
   evt.preventDefault();
+
+  // Найти кнопку отправки внутри формы
   const submitButton = evt.target.querySelector(".popup__button");
   const originalText = submitButton.textContent;
 
@@ -24,9 +27,16 @@ export function handleSubmit(makeRequest, evt) {
   submitButton.textContent = "Сохранение...";
   submitButton.disabled = true;
 
+  // Выполнить запрос
   makeRequest()
-    .catch((err) => console.error(`Ошибка: ${err}`))
+    .then(() => {
+      console.log("Данные успешно отправлены"); 
+    })
+    .catch((err) => {
+      console.error(`Ошибка: ${err}`);
+    })
     .finally(() => {
+      // Вернуть исходное состояние кнопки
       submitButton.textContent = originalText;
       submitButton.disabled = false;
     });

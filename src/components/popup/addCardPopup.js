@@ -3,7 +3,7 @@ import { createCard } from '../card.js';
 import { closeModal , openModal} from '../modal.js';
 import { clearValidation , setValidationListeners ,validationConfig } from '../validation.js';
 import { handleSubmit, resetForm } from '../utils.js';
-import { addForm, placesList, popupForm} from '../DOMElements.js';
+import { addForm, placesList, popupForm , cardLinkInput, cardNameInput} from '../DOMElements.js';
 
 
 // Обработчик отправки формы

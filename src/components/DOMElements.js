@@ -19,11 +19,11 @@
     export const deletePopup = document.querySelector(".popup_type_delete-card");
   
     // Поля ввода
-    export const nameInput = document.querySelector('.popup_type_edit input[name="name"]');
-    export const jobInput = document.querySelector('.popup_type_edit input[name="description"]');
-    export const cardNameInput = document.querySelector('.popup_type_new-card input[name="place-name"]');
-    export const cardLinkInput = document.querySelector('.popup_type_new-card input[name="link"]');
-    export const avatarInput = document.querySelector('.popup_type_avatar input[name="avatar"]');
+    export const nameInput = editProfileForm.querySelector(".popup__input_type_name");
+    export const jobInput = editProfileForm.querySelector(".popup__input_type_description");
+    export const cardNameInput = addForm.querySelector(".popup__input_type_card-name");
+    export const cardLinkInput = addForm.querySelector(".popup__input_type_url");
+    export const avatarInput = avatarForm.querySelector(".popup__input_type_url");
   
     // Список карточек
     export const placesList = document.querySelector(".places__list");
@@ -32,4 +32,6 @@
 
     export const popupImage = document.querySelector(".popup__image");
     export const popupImageCaption = document.querySelector(".popup__caption");
+    export const popupButton = document.querySelector(".popup__button");
+
   

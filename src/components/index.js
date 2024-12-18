@@ -58,6 +58,7 @@ import {
 
 import { clearValidation, enableValidation , validationConfig } from "./validation.js";
 import { initializePopups, openPopupHandlers } from "./popup/index.js";
+import { handleAddCardSubmit } from "./popup/addCardPopup.js";
 
 // Валидация 
 enableValidation(validationConfig);
@@ -69,6 +70,10 @@ initializePopups();
 editButton.addEventListener('click', openPopupHandlers.editProfile);
 addButton.addEventListener('click', openPopupHandlers.addCard);
 profileImage.addEventListener('click', openPopupHandlers.avatar);
+
+//Плавное открытие попапов
+const popupList = document.querySelectorAll(".popup");
+popupList.forEach((popup) => popup.classList.add("popup_is-animated"));
 
 // Загрузка информации о пользователе и карточек 
 const loadUserInfoAndCards = async () => {
@@ -112,24 +117,9 @@ const submitEditProfileForm = async (evt) => {
   }
 };
 
-// Обработчик добавления нового места 
-const submitAddForm = (evt) => {
-  handleSubmit(async () => {
-    const cardData = {
-      name: cardNameInput.value,
-      link: cardLinkInput.value,
-    };
-    const newCard = await addNewCard(cardData);
-    const cardElement = createCard(newCard);
-    placesList.prepend(cardElement);
-    resetForm(addForm);
-    closeModal(modalAddCard);
-  }, evt);
-};
-
 // обработчики форм
 editProfileForm.addEventListener("submit", submitEditProfileForm);
-addForm.addEventListener("submit", submitAddForm);
+addForm.addEventListener("submit", handleAddCardSubmit);
 
 // Очистка и открытие окна редактирования профиля
 editButton.addEventListener("click", () => {
