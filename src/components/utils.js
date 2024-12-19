@@ -1,4 +1,3 @@
-import { addForm } from "./DOMElements";
 
 export const showLoading = (buttonElement, loadingText) => {
   buttonElement.dataset.originalText = buttonElement.textContent;
@@ -30,6 +29,7 @@ export function handleSubmit(makeRequest, evt) {
   // Выполнить запрос
   makeRequest()
     .then(() => {
+      evt.target.reset();
       console.log("Данные успешно отправлены"); 
     })
     .catch((err) => {
@@ -49,11 +49,6 @@ export const checkResponse = (res) => {
       return res.json();
     }
     return Promise.reject(`Ошибка: ${res.status}`);
-};
-
-//Сброс полей формы 
-export const resetForm = (form) => {
-  form.reset();  
 };
 
 //проверка является ли строка допустимым юрл

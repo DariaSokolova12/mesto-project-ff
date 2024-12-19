@@ -33,5 +33,6 @@
     export const popupImage = document.querySelector(".popup__image");
     export const popupImageCaption = document.querySelector(".popup__caption");
     export const popupButton = document.querySelector(".popup__button");
+    export const popupInput = document.querySelector(".popup__input");
 
   

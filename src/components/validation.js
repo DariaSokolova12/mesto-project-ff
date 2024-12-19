@@ -6,6 +6,7 @@ export const validationConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 }; 
+
   
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement,  validationConfig) => {

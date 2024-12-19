@@ -31,6 +31,7 @@ const getInitialCards = () => request('/cards');
 const updateUserInfo = (name, about) => {
   return request('/users/me', {
     method: 'PATCH',
+    headers,
     body: JSON.stringify({name, about})
   })
 };

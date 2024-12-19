@@ -2,8 +2,8 @@ import { addNewCard } from '../api.js';
 import { createCard } from '../card.js';
 import { closeModal , openModal} from '../modal.js';
 import { clearValidation , setValidationListeners ,validationConfig } from '../validation.js';
-import { handleSubmit, resetForm } from '../utils.js';
-import { addForm, placesList, popupForm , cardLinkInput, cardNameInput} from '../DOMElements.js';
+import { handleSubmit } from '../utils.js';
+import { addForm, placesList, cardLinkInput, cardNameInput, modalAddCard} from '../DOMElements.js';
 
 
 // Обработчик отправки формы
@@ -16,7 +16,6 @@ export const handleAddCardSubmit = (evt) => {
     const newCard = await addNewCard(cardData);
     const cardElement = createCard(newCard);
     placesList.prepend(cardElement);
-    resetForm(popupForm);
     closeModal(addForm);
   }, evt);
 };
@@ -24,10 +23,10 @@ export const handleAddCardSubmit = (evt) => {
 export const openAddCardPopup = () => {
   clearValidation(addForm ,validationConfig);
   setValidationListeners(addForm, validationConfig);
-  openModal(popupForm);
+  openModal(modalAddCard);
 };
 
 // Инициализация обработчика отправки формы
 export const initializeAddCardPopup = () => {
-  popupForm.addEventListener("submit", handleAddCardSubmit);
+  modalAddCard.addEventListener("submit", handleAddCardSubmit);
 };

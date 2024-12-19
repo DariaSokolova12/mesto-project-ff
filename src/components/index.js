@@ -53,7 +53,8 @@ import {
    avatarFormElement,
    newPlaceElement,
    popupImage,
-   popupImageCaption
+   popupImageCaption,
+   popupInput
 } from "./DOMElements.js";
 
 import { clearValidation, enableValidation , validationConfig } from "./validation.js";
@@ -101,7 +102,7 @@ const loadUserInfoAndCards = async () => {
 loadUserInfoAndCards();
 
 // Обработчик для формы редакцирования профиля 
-const submitEditProfileForm = async (evt) => {
+export const submitEditProfileForm = async (evt) => {
   evt.preventDefault();
   const submitButton = evt.target.querySelector(".popup__button");
 
