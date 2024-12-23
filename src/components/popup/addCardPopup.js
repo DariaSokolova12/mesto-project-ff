@@ -1,32 +1,37 @@
-import { addNewCard } from '../api.js';
+import { addNewCard , getUserInfo } from '../api.js';
 import { createCard } from '../card.js';
 import { closeModal , openModal} from '../modal.js';
-import { clearValidation , setValidationListeners ,validationConfig } from '../validation.js';
+import { clearValidation ,validationConfig } from '../validation.js';
 import { handleSubmit } from '../utils.js';
-import { addForm, placesList, cardLinkInput, cardNameInput, modalAddCard} from '../DOMElements.js';
+import { cardPopup, placesList, cardLinkInput, cardNameInput, modalAddCard} from '../DOMElements.js';
+import { openImage } from '../index.js';
 
 
 // Обработчик отправки формы
-export const handleAddCardSubmit = (evt) => {
+export const handleAddCardSubmit = async (evt) => {
+  evt.preventDefault(); 
+
+  const userInfo = await getUserInfo();
+  const userId = userInfo._id;
+
   handleSubmit(async () => {
     const cardData = {
       name: cardNameInput.value,
       link: cardLinkInput.value,
     };
     const newCard = await addNewCard(cardData);
-    const cardElement = createCard(newCard);
+    const cardElement = createCard(newCard, userId, openImage);
     placesList.prepend(cardElement);
-    closeModal(addForm);
+    closeModal(cardPopup);
   }, evt);
 };
 // Функция для открытия попапа с очисткой ошибок
 export const openAddCardPopup = () => {
-  clearValidation(addForm ,validationConfig);
-  setValidationListeners(addForm, validationConfig);
+  clearValidation(cardPopup ,validationConfig);
   openModal(modalAddCard);
 };
 
 // Инициализация обработчика отправки формы
 export const initializeAddCardPopup = () => {
-  modalAddCard.addEventListener("submit", handleAddCardSubmit);
+  cardPopup.addEventListener("submit", handleAddCardSubmit);
 };

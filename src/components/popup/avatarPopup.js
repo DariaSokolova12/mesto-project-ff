@@ -1,8 +1,8 @@
 import { updateAvatar } from '../api.js';
 import { closeModal ,openModal } from '../modal.js';
-import { clearValidation , setValidationListeners ,validationConfig} from '../validation.js';
+import { clearValidation ,validationConfig} from '../validation.js';
 import { handleSubmit } from '../utils.js';
-import { profileImage, avatarForm , avatarFormElement} from '../DOMElements.js';
+import { profileImage, avatarPopup , avatarFormElement} from '../DOMElements.js';
 
 
 // Обработчик отправки формы
@@ -14,7 +14,7 @@ export const handleAvatarSubmit = (evt) => {
         // Обновление аватара на странице
         profileImage.setAttribute("style", `background-image: url('${res.avatar}')`);
         // Закрытие попапа после успешного обновления аватара
-        closeModal(avatarForm);
+        closeModal(avatarPopup);
       });
     }
   handleSubmit(makeRequest, evt);
@@ -22,12 +22,11 @@ export const handleAvatarSubmit = (evt) => {
 
 // Функция для открытия попапа с очисткой ошибок
 export const openAvatarPopup = () => {
-  clearValidation(avatarForm ,validationConfig);
-  setValidationListeners(avatarForm , validationConfig);
-  openModal(avatarForm);
+  clearValidation(avatarPopup,validationConfig);
+  openModal(avatarPopup);
 };
 
 // Инициализация обработчика отправки формы
 export const initializeAvatarPopup = () => {
-  avatarForm.addEventListener("submit", handleAvatarSubmit);
+  avatarPopup.addEventListener("submit", handleAvatarSubmit);
 };

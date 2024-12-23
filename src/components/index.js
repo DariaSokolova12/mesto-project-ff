@@ -1,32 +1,10 @@
 import "../index.css";
 import { createCard } from "./card.js";
-import { openModal, closeModal } from "./modal.js";
+import { openModal } from "./modal.js";
 import {
   getUserInfo,
-  updateUserInfo,
-  getInitialCards,
-  addNewCard,
-  deleteCard,
-  likeCard,
-  unlikeCard,
-  updateAvatar,
+  getInitialCards
 } from "./api.js";
-
-getUserInfo()
-  .then((userData) => {
-    console.log("Данные пользователя:", userData);
-  })
-  .catch((err) => console.error("Ошибка загрузки пользователя:", err));
-
-import {
-  showLoading,
-  hideLoading,
-  handleSubmit,
-  resetForm,
-  checkResponse,
-  handleError,
-  updateUserInfoInDOM
-} from "./utils.js";
 
 import { 
    profileTitle,
@@ -39,9 +17,9 @@ import {
    modalAddCard,
    popupTypeImage,
    modalAvatar,
-   editProfileForm, 
-   addForm, 
-   avatarForm, 
+   editProfilePopup, 
+   cardPopup, 
+   avatarPopup, 
    nameInput, 
    jobInput, 
    cardNameInput, 
@@ -67,6 +45,16 @@ enableValidation(validationConfig);
 // Инициализация попапов
 initializePopups();
 
+
+//Функция открытия окна с кртинкой 
+ export const openImage = (cardImg) => {
+  popupImage.src = cardImg.src;
+  popupImage.alt = cardImg.alt;
+  popupImageCaption.textContent = cardImg.alt;
+  openModal(popupTypeImage);
+};
+
+
 // Обработчики для попапов
 editButton.addEventListener('click', openPopupHandlers.editProfile);
 addButton.addEventListener('click', openPopupHandlers.addCard);
@@ -90,7 +78,7 @@ const loadUserInfoAndCards = async () => {
     );
 
     cards.forEach((cardData) => {
-      const cardElement = createCard(cardData, userId);
+      const cardElement = createCard(cardData, userId ,openImage);
       placesList.appendChild(cardElement);
     });
   } catch (err) {
@@ -100,44 +88,6 @@ const loadUserInfoAndCards = async () => {
 
 // Инициализация данных 
 loadUserInfoAndCards();
-
-// Обработчик для формы редакцирования профиля 
-export const submitEditProfileForm = async (evt) => {
-  evt.preventDefault();
-  const submitButton = evt.target.querySelector(".popup__button");
-
-  showLoading(submitButton, "Сохранение...");
-  try {
-    const userData = await updateUserInfo(nameInput.value, jobInput.value);
-    updateUserInfoInDOM(userData, profileTitle, profileJob);
-    closeModal(modalEditProfile);
-  } catch (err) {
-    handleError(err);
-  } finally {
-    hideLoading(submitButton);
-  }
-};
-
-// обработчики форм
-editProfileForm.addEventListener("submit", submitEditProfileForm);
-addForm.addEventListener("submit", handleAddCardSubmit);
-
-// Очистка и открытие окна редактирования профиля
-editButton.addEventListener("click", () => {
-  clearValidation(editProfileForm ,validationConfig);
-  openModal(modalEditProfile);
-});
-
-// Очистка и открытие окна добавления карточки 
-addButton.addEventListener("click", () => {
-  clearValidation(addForm, validationConfig);
-  openModal(modalAddCard);
-});
-
-profileImage.addEventListener("click", () => {
-  clearValidation(avatarForm, validationConfig);
-  openModal(avatarForm);
-});
 
 
 

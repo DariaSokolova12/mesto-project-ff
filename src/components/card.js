@@ -1,16 +1,14 @@
 import { likeCardApi, dislikeCard, deleteCard } from './api.js'; 
-import { openModal  } from './modal.js';
-import { popupImage, popupImageCaption , popupTypeImage} from './DOMElements.js';
+import { openImage } from './index.js';
 
 // Функция для создания карточки
-const createCard = (cardData, userId  ) => {
+const createCard = (cardData, userId , openImage) => {
 
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.cloneNode(true).querySelector(".card");
 
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
   const likeButton = cardElement.querySelector(".card__like-button");
   const likeCount = cardElement.querySelector(".card__like-count");
 
@@ -18,6 +16,8 @@ const createCard = (cardData, userId  ) => {
   cardImage.alt = cardData.name;
   cardTitle.textContent = cardData.name;
   likeCount.textContent = cardData.likes.length;
+
+  const deleteButton = cardElement.querySelector(".card__delete-button");
 
   // Показываем кнопку удаления только если карточка создана владельцем
   if (cardData.owner._id === userId) {
@@ -41,21 +41,13 @@ const createCard = (cardData, userId  ) => {
     }
   });
 
-  // Обработчик добавления картинки
-   cardImage.addEventListener("click", () => {
-    openImage(cardImage, popupImage, popupImageCaption, popupTypeImage);
+  cardImage.addEventListener("click", () => {
+    openImage(cardImage);
   });
 
   return cardElement;
 };
 
-//Функция открытия окна с картинкой
-const openImage = ( cardImg,popupImage, popupImageCaption, popupTypeImage) => {
-  popupImage.src = cardImg.src;
-  popupImage.alt = cardImg.alt;
-  popupImageCaption.textContent = cardImg.alt;
-  openModal(popupTypeImage);
-};
 
 // Функция для удаления карточки
 const handleDeleteCard = (cardElement, cardId) => {

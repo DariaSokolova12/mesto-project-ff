@@ -13,17 +13,19 @@
   
     // Формы
     export const popupForm = document.querySelector(".popup__form");
-    export const editProfileForm = document.querySelector(".popup_type_edit");
-    export const addForm = document.querySelector(".popup_type_new-card");
-    export const avatarForm = document.querySelector(".popup_type_avatar");
+
+    //попапы
+    export const editProfilePopup = document.querySelector(".popup_type_edit");
+    export const cardPopup = document.querySelector(".popup_type_new-card");
+    export const avatarPopup = document.querySelector(".popup_type_avatar");
     export const deletePopup = document.querySelector(".popup_type_delete-card");
   
     // Поля ввода
-    export const nameInput = editProfileForm.querySelector(".popup__input_type_name");
-    export const jobInput = editProfileForm.querySelector(".popup__input_type_description");
-    export const cardNameInput = addForm.querySelector(".popup__input_type_card-name");
-    export const cardLinkInput = addForm.querySelector(".popup__input_type_url");
-    export const avatarInput = avatarForm.querySelector(".popup__input_type_url");
+    export const nameInput = editProfilePopup.querySelector(".popup__input_type_name");
+    export const jobInput = editProfilePopup.querySelector(".popup__input_type_description");
+    export const cardNameInput = cardPopup.querySelector(".popup__input_type_card-name");
+    export const cardLinkInput = cardPopup.querySelector(".popup__input_type_url");
+    export const avatarInput = avatarPopup.querySelector(".popup__input_type_url");
   
     // Список карточек
     export const placesList = document.querySelector(".places__list");
